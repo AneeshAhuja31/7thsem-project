@@ -1,0 +1,726 @@
+@prefix med: <http://example.org/medical#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ==============================================================================
+# ONTOLOGY HEADER
+# ==============================================================================
+<http://example.org/medical> a owl:Ontology ;
+    rdfs:label "Healthcare Domain Ontology" ;
+    rdfs:comment "Ontology for ontology-enhanced agentic retrieval research" .
+
+# ==============================================================================
+# OBJECT PROPERTIES
+# ==============================================================================
+med:hasSymptom a owl:ObjectProperty ;
+    rdfs:label "has symptom" ;
+    rdfs:domain med:Disease ;
+    rdfs:range med:Symptom .
+
+med:treatedBy a owl:ObjectProperty ;
+    rdfs:label "treated by" ;
+    rdfs:domain med:Disease ;
+    rdfs:range med:Treatment .
+
+med:diagnosedBy a owl:ObjectProperty ;
+    rdfs:label "diagnosed by" ;
+    rdfs:domain med:Disease ;
+    rdfs:range med:DiagnosticTest .
+
+med:relatedCondition a owl:ObjectProperty ;
+    rdfs:label "related condition" ;
+    rdfs:domain med:Disease ;
+    rdfs:range med:Disease .
+
+med:sideEffect a owl:ObjectProperty ;
+    rdfs:label "side effect" ;
+    rdfs:domain med:Treatment ;
+    rdfs:range med:Symptom .
+
+med:contraindicatedWith a owl:ObjectProperty ;
+    rdfs:label "contraindicated with" ;
+    rdfs:domain med:Treatment ;
+    rdfs:range med:Disease .
+
+med:riskFactorFor a owl:ObjectProperty ;
+    rdfs:label "risk factor for" ;
+    rdfs:domain med:Disease ;
+    rdfs:range med:Disease .
+
+# ==============================================================================
+# TOP-LEVEL CLASSES
+# ==============================================================================
+med:Disease a owl:Class ;
+    rdfs:label "Disease" .
+
+med:Symptom a owl:Class ;
+    rdfs:label "Symptom" .
+
+med:Treatment a owl:Class ;
+    rdfs:label "Treatment" .
+
+med:DiagnosticTest a owl:Class ;
+    rdfs:label "Diagnostic Test" .
+
+# ==============================================================================
+# DISEASE HIERARCHY
+# ==============================================================================
+
+# --- Cardiovascular Diseases ---
+med:CardiovascularDisease a owl:Class ;
+    rdfs:subClassOf med:Disease ;
+    rdfs:label "Cardiovascular Disease" .
+
+med:Hypertension a owl:Class ;
+    rdfs:subClassOf med:CardiovascularDisease ;
+    rdfs:label "Hypertension" .
+
+med:CoronaryArteryDisease a owl:Class ;
+    rdfs:subClassOf med:CardiovascularDisease ;
+    rdfs:label "Coronary Artery Disease" .
+
+med:HeartFailure a owl:Class ;
+    rdfs:subClassOf med:CardiovascularDisease ;
+    rdfs:label "Heart Failure" .
+
+med:Arrhythmia a owl:Class ;
+    rdfs:subClassOf med:CardiovascularDisease ;
+    rdfs:label "Arrhythmia" .
+
+med:Atherosclerosis a owl:Class ;
+    rdfs:subClassOf med:CardiovascularDisease ;
+    rdfs:label "Atherosclerosis" .
+
+med:MyocardialInfarction a owl:Class ;
+    rdfs:subClassOf med:CardiovascularDisease ;
+    rdfs:label "Myocardial Infarction" .
+
+med:Stroke a owl:Class ;
+    rdfs:subClassOf med:CardiovascularDisease ;
+    rdfs:label "Stroke" .
+
+# --- Respiratory Diseases ---
+med:RespiratoryDisease a owl:Class ;
+    rdfs:subClassOf med:Disease ;
+    rdfs:label "Respiratory Disease" .
+
+med:Asthma a owl:Class ;
+    rdfs:subClassOf med:RespiratoryDisease ;
+    rdfs:label "Asthma" .
+
+med:COPD a owl:Class ;
+    rdfs:subClassOf med:RespiratoryDisease ;
+    rdfs:label "COPD" .
+
+med:Pneumonia a owl:Class ;
+    rdfs:subClassOf med:RespiratoryDisease ;
+    rdfs:label "Pneumonia" .
+
+med:Bronchitis a owl:Class ;
+    rdfs:subClassOf med:RespiratoryDisease ;
+    rdfs:label "Bronchitis" .
+
+med:LungCancer a owl:Class ;
+    rdfs:subClassOf med:RespiratoryDisease ;
+    rdfs:label "Lung Cancer" .
+
+# --- Metabolic Diseases ---
+med:MetabolicDisease a owl:Class ;
+    rdfs:subClassOf med:Disease ;
+    rdfs:label "Metabolic Disease" .
+
+med:Type2Diabetes a owl:Class ;
+    rdfs:subClassOf med:MetabolicDisease ;
+    rdfs:label "Type 2 Diabetes" .
+
+med:Type1Diabetes a owl:Class ;
+    rdfs:subClassOf med:MetabolicDisease ;
+    rdfs:label "Type 1 Diabetes" .
+
+med:Obesity a owl:Class ;
+    rdfs:subClassOf med:MetabolicDisease ;
+    rdfs:label "Obesity" .
+
+med:Hyperlipidemia a owl:Class ;
+    rdfs:subClassOf med:MetabolicDisease ;
+    rdfs:label "Hyperlipidemia" .
+
+med:MetabolicSyndrome a owl:Class ;
+    rdfs:subClassOf med:MetabolicDisease ;
+    rdfs:label "Metabolic Syndrome" .
+
+# --- Neurological Diseases ---
+med:NeurologicalDisease a owl:Class ;
+    rdfs:subClassOf med:Disease ;
+    rdfs:label "Neurological Disease" .
+
+med:Alzheimers a owl:Class ;
+    rdfs:subClassOf med:NeurologicalDisease ;
+    rdfs:label "Alzheimers" .
+
+med:Parkinsons a owl:Class ;
+    rdfs:subClassOf med:NeurologicalDisease ;
+    rdfs:label "Parkinsons" .
+
+med:Epilepsy a owl:Class ;
+    rdfs:subClassOf med:NeurologicalDisease ;
+    rdfs:label "Epilepsy" .
+
+med:Migraine a owl:Class ;
+    rdfs:subClassOf med:NeurologicalDisease ;
+    rdfs:label "Migraine" .
+
+med:MultipleSclerosis a owl:Class ;
+    rdfs:subClassOf med:NeurologicalDisease ;
+    rdfs:label "Multiple Sclerosis" .
+
+# --- Infectious Diseases ---
+med:InfectiousDisease a owl:Class ;
+    rdfs:subClassOf med:Disease ;
+    rdfs:label "Infectious Disease" .
+
+med:Influenza a owl:Class ;
+    rdfs:subClassOf med:InfectiousDisease ;
+    rdfs:label "Influenza" .
+
+med:Tuberculosis a owl:Class ;
+    rdfs:subClassOf med:InfectiousDisease ;
+    rdfs:label "Tuberculosis" .
+
+med:COVID19 a owl:Class ;
+    rdfs:subClassOf med:InfectiousDisease ;
+    rdfs:label "COVID-19" .
+
+med:Hepatitis a owl:Class ;
+    rdfs:subClassOf med:InfectiousDisease ;
+    rdfs:label "Hepatitis" .
+
+med:HIV a owl:Class ;
+    rdfs:subClassOf med:InfectiousDisease ;
+    rdfs:label "HIV" .
+
+# --- Mental Health Disorders ---
+med:MentalHealthDisorder a owl:Class ;
+    rdfs:subClassOf med:Disease ;
+    rdfs:label "Mental Health Disorder" .
+
+med:Depression a owl:Class ;
+    rdfs:subClassOf med:MentalHealthDisorder ;
+    rdfs:label "Depression" .
+
+med:AnxietyDisorder a owl:Class ;
+    rdfs:subClassOf med:MentalHealthDisorder ;
+    rdfs:label "Anxiety Disorder" .
+
+med:Schizophrenia a owl:Class ;
+    rdfs:subClassOf med:MentalHealthDisorder ;
+    rdfs:label "Schizophrenia" .
+
+med:BipolarDisorder a owl:Class ;
+    rdfs:subClassOf med:MentalHealthDisorder ;
+    rdfs:label "Bipolar Disorder" .
+
+med:PTSD a owl:Class ;
+    rdfs:subClassOf med:MentalHealthDisorder ;
+    rdfs:label "PTSD" .
+
+# ==============================================================================
+# SYMPTOM CLASSES
+# ==============================================================================
+med:ChestPain a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Chest Pain" .
+
+med:Dyspnea a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Dyspnea" .
+
+med:Fatigue a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Fatigue" .
+
+med:Headache a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Headache" .
+
+med:Fever a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Fever" .
+
+med:Cough a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Cough" .
+
+med:Edema a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Edema" .
+
+med:Dizziness a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Dizziness" .
+
+med:Nausea a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Nausea" .
+
+med:WeightLoss a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Weight Loss" .
+
+med:Tremor a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Tremor" .
+
+med:MemoryLoss a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Memory Loss" .
+
+med:Wheezing a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Wheezing" .
+
+med:JointPain a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Joint Pain" .
+
+med:Insomnia a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Insomnia" .
+
+med:Palpitations a owl:Class ;
+    rdfs:subClassOf med:Symptom ;
+    rdfs:label "Palpitations" .
+
+# ==============================================================================
+# TREATMENT HIERARCHY
+# ==============================================================================
+
+# --- Medications ---
+med:Medication a owl:Class ;
+    rdfs:subClassOf med:Treatment ;
+    rdfs:label "Medication" .
+
+med:Antihypertensive a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Antihypertensive" .
+
+med:Anticoagulant a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Anticoagulant" .
+
+med:Bronchodilator a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Bronchodilator" .
+
+med:Insulin a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Insulin" .
+
+med:Antidepressant a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Antidepressant" .
+
+med:Statin a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Statin" .
+
+med:Anticonvulsant a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Anticonvulsant" .
+
+med:Antipsychotic a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Antipsychotic" .
+
+med:Antibiotic a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Antibiotic" .
+
+med:Antiviral a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Antiviral" .
+
+med:BetaBlocker a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "Beta Blocker" .
+
+med:ACEInhibitor a owl:Class ;
+    rdfs:subClassOf med:Medication ;
+    rdfs:label "ACE Inhibitor" .
+
+# --- Procedures ---
+med:Procedure a owl:Class ;
+    rdfs:subClassOf med:Treatment ;
+    rdfs:label "Procedure" .
+
+med:Angioplasty a owl:Class ;
+    rdfs:subClassOf med:Procedure ;
+    rdfs:label "Angioplasty" .
+
+med:BypassSurgery a owl:Class ;
+    rdfs:subClassOf med:Procedure ;
+    rdfs:label "Bypass Surgery" .
+
+med:Dialysis a owl:Class ;
+    rdfs:subClassOf med:Procedure ;
+    rdfs:label "Dialysis" .
+
+med:Chemotherapy a owl:Class ;
+    rdfs:subClassOf med:Procedure ;
+    rdfs:label "Chemotherapy" .
+
+# --- Therapy ---
+med:Therapy a owl:Class ;
+    rdfs:subClassOf med:Treatment ;
+    rdfs:label "Therapy" .
+
+med:CognitiveBehavioralTherapy a owl:Class ;
+    rdfs:subClassOf med:Therapy ;
+    rdfs:label "Cognitive Behavioral Therapy" .
+
+med:PhysicalTherapy a owl:Class ;
+    rdfs:subClassOf med:Therapy ;
+    rdfs:label "Physical Therapy" .
+
+med:OccupationalTherapy a owl:Class ;
+    rdfs:subClassOf med:Therapy ;
+    rdfs:label "Occupational Therapy" .
+
+# ==============================================================================
+# DIAGNOSTIC TEST CLASSES
+# ==============================================================================
+med:BloodTest a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "Blood Test" .
+
+med:ECG a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "ECG" .
+
+med:MRI a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "MRI" .
+
+med:CTScan a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "CT Scan" .
+
+med:XRay a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "X-Ray" .
+
+med:Spirometry a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "Spirometry" .
+
+med:BloodGlucoseTest a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "Blood Glucose Test" .
+
+med:Echocardiogram a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "Echocardiogram" .
+
+med:LipidPanel a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "Lipid Panel" .
+
+med:PulmonaryFunctionTest a owl:Class ;
+    rdfs:subClassOf med:DiagnosticTest ;
+    rdfs:label "Pulmonary Function Test" .
+
+# ==============================================================================
+# EQUIVALENCE RELATIONS (lay term <-> clinical term)
+# ==============================================================================
+med:HighBloodPressure a owl:Class ;
+    owl:equivalentClass med:Hypertension ;
+    rdfs:label "High Blood Pressure" .
+
+med:HeartAttack a owl:Class ;
+    owl:equivalentClass med:MyocardialInfarction ;
+    rdfs:label "Heart Attack" .
+
+med:AdultOnsetDiabetes a owl:Class ;
+    owl:equivalentClass med:Type2Diabetes ;
+    rdfs:label "Adult Onset Diabetes" .
+
+med:ShortnessOfBreath a owl:Class ;
+    owl:equivalentClass med:Dyspnea ;
+    rdfs:label "Shortness of Breath" .
+
+med:HighCholesterol a owl:Class ;
+    owl:equivalentClass med:Hyperlipidemia ;
+    rdfs:label "High Cholesterol" .
+
+med:ChronicObstructivePulmonaryDisease a owl:Class ;
+    owl:equivalentClass med:COPD ;
+    rdfs:label "Chronic Obstructive Pulmonary Disease" .
+
+med:CerebrovascularAccident a owl:Class ;
+    owl:equivalentClass med:Stroke ;
+    rdfs:label "Cerebrovascular Accident" .
+
+med:JuvenileDiabetes a owl:Class ;
+    owl:equivalentClass med:Type1Diabetes ;
+    rdfs:label "Juvenile Diabetes" .
+
+med:Flu a owl:Class ;
+    owl:equivalentClass med:Influenza ;
+    rdfs:label "Flu" .
+
+med:SadnessDisorder a owl:Class ;
+    owl:equivalentClass med:Depression ;
+    rdfs:label "Sadness Disorder" .
+
+med:FitDisorder a owl:Class ;
+    owl:equivalentClass med:Epilepsy ;
+    rdfs:label "Fit Disorder" .
+
+med:ShakingPalsy a owl:Class ;
+    owl:equivalentClass med:Parkinsons ;
+    rdfs:label "Shaking Palsy" .
+
+# ==============================================================================
+# DISEASE-SYMPTOM ASSERTIONS (hasSymptom)
+# ==============================================================================
+
+# Cardiovascular
+med:Hypertension med:hasSymptom med:Headache .
+med:Hypertension med:hasSymptom med:Dizziness .
+med:Hypertension med:hasSymptom med:ChestPain .
+med:Hypertension med:hasSymptom med:Fatigue .
+
+med:CoronaryArteryDisease med:hasSymptom med:ChestPain .
+med:CoronaryArteryDisease med:hasSymptom med:Dyspnea .
+med:CoronaryArteryDisease med:hasSymptom med:Fatigue .
+
+med:HeartFailure med:hasSymptom med:Dyspnea .
+med:HeartFailure med:hasSymptom med:Edema .
+med:HeartFailure med:hasSymptom med:Fatigue .
+med:HeartFailure med:hasSymptom med:Palpitations .
+
+med:Arrhythmia med:hasSymptom med:Palpitations .
+med:Arrhythmia med:hasSymptom med:Dizziness .
+med:Arrhythmia med:hasSymptom med:Dyspnea .
+
+med:MyocardialInfarction med:hasSymptom med:ChestPain .
+med:MyocardialInfarction med:hasSymptom med:Dyspnea .
+med:MyocardialInfarction med:hasSymptom med:Nausea .
+
+med:Stroke med:hasSymptom med:Headache .
+med:Stroke med:hasSymptom med:Dizziness .
+
+# Respiratory
+med:Asthma med:hasSymptom med:Wheezing .
+med:Asthma med:hasSymptom med:Dyspnea .
+med:Asthma med:hasSymptom med:Cough .
+med:Asthma med:hasSymptom med:ChestPain .
+
+med:COPD med:hasSymptom med:Dyspnea .
+med:COPD med:hasSymptom med:Cough .
+med:COPD med:hasSymptom med:Wheezing .
+med:COPD med:hasSymptom med:Fatigue .
+
+med:Pneumonia med:hasSymptom med:Fever .
+med:Pneumonia med:hasSymptom med:Cough .
+med:Pneumonia med:hasSymptom med:Dyspnea .
+med:Pneumonia med:hasSymptom med:ChestPain .
+
+med:Bronchitis med:hasSymptom med:Cough .
+med:Bronchitis med:hasSymptom med:Fatigue .
+med:Bronchitis med:hasSymptom med:Dyspnea .
+
+# Metabolic
+med:Type2Diabetes med:hasSymptom med:Fatigue .
+med:Type2Diabetes med:hasSymptom med:WeightLoss .
+med:Type2Diabetes med:hasSymptom med:Nausea .
+
+med:Type1Diabetes med:hasSymptom med:Fatigue .
+med:Type1Diabetes med:hasSymptom med:WeightLoss .
+med:Type1Diabetes med:hasSymptom med:Nausea .
+
+med:Obesity med:hasSymptom med:Fatigue .
+med:Obesity med:hasSymptom med:Dyspnea .
+med:Obesity med:hasSymptom med:JointPain .
+
+# Neurological
+med:Alzheimers med:hasSymptom med:MemoryLoss .
+med:Alzheimers med:hasSymptom med:Fatigue .
+
+med:Parkinsons med:hasSymptom med:Tremor .
+med:Parkinsons med:hasSymptom med:Fatigue .
+
+med:Epilepsy med:hasSymptom med:Dizziness .
+med:Epilepsy med:hasSymptom med:Headache .
+med:Epilepsy med:hasSymptom med:Nausea .
+
+med:Migraine med:hasSymptom med:Headache .
+med:Migraine med:hasSymptom med:Nausea .
+med:Migraine med:hasSymptom med:Dizziness .
+
+# Infectious
+med:Influenza med:hasSymptom med:Fever .
+med:Influenza med:hasSymptom med:Cough .
+med:Influenza med:hasSymptom med:Fatigue .
+med:Influenza med:hasSymptom med:Headache .
+
+med:Tuberculosis med:hasSymptom med:Cough .
+med:Tuberculosis med:hasSymptom med:Fever .
+med:Tuberculosis med:hasSymptom med:WeightLoss .
+
+med:COVID19 med:hasSymptom med:Fever .
+med:COVID19 med:hasSymptom med:Cough .
+med:COVID19 med:hasSymptom med:Dyspnea .
+med:COVID19 med:hasSymptom med:Fatigue .
+
+# Mental Health
+med:Depression med:hasSymptom med:Fatigue .
+med:Depression med:hasSymptom med:Insomnia .
+med:Depression med:hasSymptom med:WeightLoss .
+
+med:AnxietyDisorder med:hasSymptom med:Insomnia .
+med:AnxietyDisorder med:hasSymptom med:Palpitations .
+med:AnxietyDisorder med:hasSymptom med:Nausea .
+
+# ==============================================================================
+# DISEASE-TREATMENT ASSERTIONS (treatedBy)
+# ==============================================================================
+med:Hypertension med:treatedBy med:Antihypertensive .
+med:Hypertension med:treatedBy med:ACEInhibitor .
+med:Hypertension med:treatedBy med:BetaBlocker .
+
+med:CoronaryArteryDisease med:treatedBy med:Statin .
+med:CoronaryArteryDisease med:treatedBy med:Anticoagulant .
+med:CoronaryArteryDisease med:treatedBy med:Angioplasty .
+med:CoronaryArteryDisease med:treatedBy med:BypassSurgery .
+
+med:HeartFailure med:treatedBy med:ACEInhibitor .
+med:HeartFailure med:treatedBy med:BetaBlocker .
+med:HeartFailure med:treatedBy med:Antihypertensive .
+
+med:Arrhythmia med:treatedBy med:BetaBlocker .
+med:Arrhythmia med:treatedBy med:Anticoagulant .
+
+med:MyocardialInfarction med:treatedBy med:Anticoagulant .
+med:MyocardialInfarction med:treatedBy med:Angioplasty .
+med:MyocardialInfarction med:treatedBy med:BypassSurgery .
+
+med:Asthma med:treatedBy med:Bronchodilator .
+med:COPD med:treatedBy med:Bronchodilator .
+med:Pneumonia med:treatedBy med:Antibiotic .
+med:Bronchitis med:treatedBy med:Antibiotic .
+
+med:Type2Diabetes med:treatedBy med:Insulin .
+med:Type1Diabetes med:treatedBy med:Insulin .
+med:Hyperlipidemia med:treatedBy med:Statin .
+
+med:Alzheimers med:treatedBy med:OccupationalTherapy .
+med:Parkinsons med:treatedBy med:PhysicalTherapy .
+med:Epilepsy med:treatedBy med:Anticonvulsant .
+med:Migraine med:treatedBy med:Anticonvulsant .
+
+med:Influenza med:treatedBy med:Antiviral .
+med:COVID19 med:treatedBy med:Antiviral .
+med:Tuberculosis med:treatedBy med:Antibiotic .
+med:HIV med:treatedBy med:Antiviral .
+
+med:Depression med:treatedBy med:Antidepressant .
+med:Depression med:treatedBy med:CognitiveBehavioralTherapy .
+med:AnxietyDisorder med:treatedBy med:Antidepressant .
+med:AnxietyDisorder med:treatedBy med:CognitiveBehavioralTherapy .
+med:Schizophrenia med:treatedBy med:Antipsychotic .
+med:BipolarDisorder med:treatedBy med:Anticonvulsant .
+med:BipolarDisorder med:treatedBy med:Antipsychotic .
+
+# ==============================================================================
+# DISEASE-DIAGNOSTIC ASSERTIONS (diagnosedBy)
+# ==============================================================================
+med:Hypertension med:diagnosedBy med:BloodTest .
+med:CoronaryArteryDisease med:diagnosedBy med:ECG .
+med:CoronaryArteryDisease med:diagnosedBy med:Echocardiogram .
+med:HeartFailure med:diagnosedBy med:Echocardiogram .
+med:HeartFailure med:diagnosedBy med:BloodTest .
+med:Arrhythmia med:diagnosedBy med:ECG .
+med:MyocardialInfarction med:diagnosedBy med:ECG .
+med:MyocardialInfarction med:diagnosedBy med:BloodTest .
+
+med:Asthma med:diagnosedBy med:Spirometry .
+med:Asthma med:diagnosedBy med:PulmonaryFunctionTest .
+med:COPD med:diagnosedBy med:Spirometry .
+med:COPD med:diagnosedBy med:PulmonaryFunctionTest .
+med:Pneumonia med:diagnosedBy med:XRay .
+med:LungCancer med:diagnosedBy med:CTScan .
+med:LungCancer med:diagnosedBy med:XRay .
+
+med:Type2Diabetes med:diagnosedBy med:BloodGlucoseTest .
+med:Type1Diabetes med:diagnosedBy med:BloodGlucoseTest .
+med:Hyperlipidemia med:diagnosedBy med:LipidPanel .
+med:Hyperlipidemia med:diagnosedBy med:BloodTest .
+
+med:Alzheimers med:diagnosedBy med:MRI .
+med:Parkinsons med:diagnosedBy med:MRI .
+med:Epilepsy med:diagnosedBy med:MRI .
+med:MultipleSclerosis med:diagnosedBy med:MRI .
+med:Stroke med:diagnosedBy med:CTScan .
+med:Stroke med:diagnosedBy med:MRI .
+
+med:Tuberculosis med:diagnosedBy med:XRay .
+med:Tuberculosis med:diagnosedBy med:BloodTest .
+med:HIV med:diagnosedBy med:BloodTest .
+med:Hepatitis med:diagnosedBy med:BloodTest .
+
+# ==============================================================================
+# RELATED CONDITION ASSERTIONS (relatedCondition)
+# ==============================================================================
+med:Hypertension med:relatedCondition med:CoronaryArteryDisease .
+med:Hypertension med:relatedCondition med:Stroke .
+med:Hypertension med:relatedCondition med:HeartFailure .
+med:Hypertension med:relatedCondition med:Atherosclerosis .
+
+med:CoronaryArteryDisease med:relatedCondition med:MyocardialInfarction .
+med:CoronaryArteryDisease med:relatedCondition med:Atherosclerosis .
+
+med:Atherosclerosis med:relatedCondition med:Hypertension .
+med:Atherosclerosis med:relatedCondition med:Hyperlipidemia .
+
+med:Type2Diabetes med:relatedCondition med:Obesity .
+med:Type2Diabetes med:relatedCondition med:Hypertension .
+med:Type2Diabetes med:relatedCondition med:Hyperlipidemia .
+med:Type2Diabetes med:relatedCondition med:MetabolicSyndrome .
+
+med:Obesity med:relatedCondition med:Type2Diabetes .
+med:Obesity med:relatedCondition med:Hypertension .
+med:Obesity med:relatedCondition med:Hyperlipidemia .
+
+med:COPD med:relatedCondition med:LungCancer .
+med:COPD med:relatedCondition med:Pneumonia .
+
+med:Depression med:relatedCondition med:AnxietyDisorder .
+med:AnxietyDisorder med:relatedCondition med:Depression .
+med:Depression med:relatedCondition med:Insomnia .
+
+med:Hyperlipidemia med:relatedCondition med:Atherosclerosis .
+med:Hyperlipidemia med:relatedCondition med:CoronaryArteryDisease .
+
+med:MetabolicSyndrome med:relatedCondition med:Type2Diabetes .
+med:MetabolicSyndrome med:relatedCondition med:Obesity .
+med:MetabolicSyndrome med:relatedCondition med:Hypertension .
+med:MetabolicSyndrome med:relatedCondition med:Hyperlipidemia .
+
+# ==============================================================================
+# RISK FACTOR ASSERTIONS (riskFactorFor)
+# ==============================================================================
+med:Obesity med:riskFactorFor med:Type2Diabetes .
+med:Obesity med:riskFactorFor med:Hypertension .
+med:Obesity med:riskFactorFor med:CoronaryArteryDisease .
+
+med:Hypertension med:riskFactorFor med:Stroke .
+med:Hypertension med:riskFactorFor med:MyocardialInfarction .
+
+med:Hyperlipidemia med:riskFactorFor med:Atherosclerosis .
+med:Hyperlipidemia med:riskFactorFor med:CoronaryArteryDisease .
+
+med:Type2Diabetes med:riskFactorFor med:CoronaryArteryDisease .
+med:Type2Diabetes med:riskFactorFor med:Stroke .
